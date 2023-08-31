@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class DailyToolListTest {
-    User user1 = new User(21, "Khmarenko", "Gleb");
-    User user2 = new User(19, "Khmarenko", "Varvara");
-    User user3 = new User(22, "Svechnikov", "Yan");
-    User user4 = new User(16, "Mamontov", "Mark");
+    private final User user1 = new User(21, "Khmarenko", "Gleb");
+    private final User user2 = new User(19, "Khmarenki", "Varvara");
+    private final User user3 = new User(16, "Mamontov", "Mark");
+    private final User user4 = new User(22, "Svechnikov", "Yan");
 
     @Test
     public void calcDailyAmount() {
@@ -34,10 +34,12 @@ public class DailyToolListTest {
 
         DailyToolList dailyToolList0 = new DailyToolList(list0, new BigDecimal(0));
 
-        Assertions.assertEquals("[Khmarenko Gleb Id: 0 price: 100, " +
-                "Khmarenko Varvara Id: 1 price: 750, Mamontov Mark Id: 3 price: 675, " +
-                "Svechnikov Yan Id: 2 price: 2500]", dailyToolList0.toString());
-        Assertions.assertEquals(new BigDecimal(4025),
+        Assertions.assertEquals("Khmarenki", dailyToolList0.getSortedList().get(0).getUser().getSourName());
+        Assertions.assertEquals("Svechnikov", dailyToolList0.getSortedList().get(3).getUser().getSourName());
+        Assertions.assertEquals("DailyToolListTest: [Khmarenki Varvara Id: 1 price: 750, " +
+                "Khmarenko Gleb Id: 0 price: 100, Mamontov Mark Id: 2 price: 2500, " +
+                "Svechnikov Yan Id: 3 price: 900]", dailyToolList0.toString());
+        Assertions.assertEquals(new BigDecimal(4250),
                 dailyToolList0.calcDailyAmount(new BigDecimal(0)));
 
 
@@ -61,9 +63,11 @@ public class DailyToolListTest {
 
         DailyToolList dailyToolList1 = new DailyToolList(list1, new BigDecimal(0));
 
-        Assertions.assertEquals("[Khmarenko Gleb Id: 0 price: 0, " +
-                "Khmarenko Gleb Id: 1 price: 500, Khmarenko Varvara Id: 1 price: 1000, " +
-                "Khmarenko Varvara Id: 3 price: 10]", dailyToolList1.toString());
+        Assertions.assertEquals("Khmarenki", dailyToolList1.getSortedList().get(1).getUser().getSourName());
+        Assertions.assertEquals("Khmarenko", dailyToolList1.getSortedList().get(2).getUser().getSourName());
+        Assertions.assertEquals("DailyToolListTest: [Khmarenki Varvara Id: 1 price: 1000, " +
+                "Khmarenki Varvara Id: 3 price: 10, Khmarenko Gleb Id: 0 price: 0, " +
+                "Khmarenko Gleb Id: 1 price: 500]", dailyToolList1.toString());
         Assertions.assertEquals(new BigDecimal(1510),
                 dailyToolList1.calcDailyAmount(new BigDecimal(0)));
     }
