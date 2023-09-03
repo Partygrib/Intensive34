@@ -2,7 +2,7 @@ package ru.aston.khmarenko_gi.task1;
 
 import java.math.BigDecimal;
 
-public abstract class Tool implements Discount {
+public abstract class Tool implements Discount, Comparable<Tool> {
     private int id;
     protected BigDecimal weight;
     protected BigDecimal amount;
@@ -32,4 +32,14 @@ public abstract class Tool implements Discount {
     public User getUser() {return this.user;}
 
     public void setUser(User user) {this.user = user;}
+
+    @Override
+    public int compareTo(Tool o) {
+        return this.getUser().getSourName().compareTo(o.getUser().getSourName());
+    }
+
+    @Override
+    public String toString() {
+        return user.toString() + " Id: " + id + " price: " + getServicePrice();
+    }
 }

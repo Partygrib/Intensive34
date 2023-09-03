@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DailyToolList implements ToolCalculation {
 
-    private final List<Tool> toolList;
+    private List<Tool> toolList;
 
     private final BigDecimal INIT_SUM;
 
@@ -25,14 +25,14 @@ public class DailyToolList implements ToolCalculation {
         return k;
     }
 
+    public List<Tool> getSortedList() {
+        Collections.sort(toolList);
+        return this.toolList;
+    }
+
     @Override
     public String toString() {
-        List<String> listSorted = new ArrayList<>();
-        for (Tool tool : toolList) {
-            listSorted.add(tool.getUser().getSourName() + " " + tool.getUser().getName() + " Id: " +
-                    tool.getId() + " price: " + tool.getServicePrice());
-        }
-        Collections.sort(listSorted);
-        return listSorted.toString();
+        return "DailyToolListTest: " + toolList.toString();
     }
+
 }
