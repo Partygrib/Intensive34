@@ -1,5 +1,7 @@
 package ru.aston.khmarenko_gi.task1;
 
+import ru.aston.khmarenko_gi.task2.TooYoungCustomer;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -8,10 +10,13 @@ public class User {
     private String sourName;
     private String name;
 
-    public User (int age, String sourName, String name) {
+    public User (int age, String sourName, String name) throws TooYoungCustomer {
         this.age = age;
         this.sourName = sourName;
         this.name = name;
+
+        boolean ageLimitCheck = age < 14;
+        if (ageLimitCheck) throw new TooYoungCustomer("Покупатель не проходит под возрастное ограничение!");
     }
 
     public int getAge() {return this.age;}

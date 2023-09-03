@@ -5,12 +5,25 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import ru.aston.khmarenko_gi.task2.TooYoungCustomer;
 
 public class DailyToolListTest {
     private final User user1 = new User(21, "Khmarenko", "Gleb");
     private final User user2 = new User(19, "Khmarenki", "Varvara");
     private final User user3 = new User(16, "Mamontov", "Mark");
     private final User user4 = new User(22, "Svechnikov", "Yan");
+
+    public DailyToolListTest() throws TooYoungCustomer {
+    }
+
+    @Test
+    public void testTooYoungCustomer() {
+        Assertions.assertThrows(TooYoungCustomer.class, () -> new User(0, "Gaffarov", "Elmir"));
+        Assertions.assertThrows(TooYoungCustomer.class, () -> new User(12, "Khmarenko", "Gleb"));
+        Assertions.assertEquals("Exception: TooYoungCustomer, number: 2049, " +
+                "message: Покупатель не проходит под возрастное ограничение!",
+                new TooYoungCustomer("Покупатель не проходит под возрастное ограничение!").toString());
+    }
 
     @Test
     public void calcDailyAmount() {
