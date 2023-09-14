@@ -1,0 +1,15 @@
+CREATE SCHEMA IF NOT EXISTS db1;
+
+CREATE TABLE IF NOT EXISTS db1.orders (
+	id SERIAL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    order_date DATE NOT NULL);
+
+CREATE TABLE IF NOT EXISTS db1.users (
+	id SERIAL PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    surname VARCHAR(50) NOT NULL,
+    middle_name VARCHAR(50),
+    number VARCHAR(15) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    order_id BIGINT REFERENCES db1.orders(id));
